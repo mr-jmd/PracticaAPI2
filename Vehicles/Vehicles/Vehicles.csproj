@@ -22,6 +22,7 @@
   <ItemGroup>
 	<Folder Include="Helpers\" />
     <Folder Include="Data\" />
+    <Folder Include="wwwroot\Files\" />
   </ItemGroup>
 
 </Project>

@@ -17,6 +17,7 @@ namespace Vehicles.Data
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleType> VehicleTypes { get; set; }
         public DbSet<Detail> Details { get; set; }
+        public DbSet<VehiclePhoto> VehiclePhotos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -45,6 +46,10 @@ namespace Vehicles.Data
                 .WithMany(b => b.Details)
                 .HasForeignKey(bc => bc.ProcedureId);
 
+            modelBuilder.Entity<VehiclePhoto>()
+                .HasOne(bc => bc.Vehicle)
+                .WithMany(b => b.VehiclePhotos)
+                .HasForeignKey(bc => bc.VehicleId);
 
             base.OnModelCreating(modelBuilder);
         }

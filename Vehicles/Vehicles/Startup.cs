@@ -1,6 +1,7 @@
 ﻿using Vehicles.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Vehicles.Services;
 
 namespace Vehicles
 {
@@ -19,6 +20,9 @@ namespace Vehicles
             services.AddControllers();
 
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddTransient<IFileStorage, LocalFileStorage>();
+            services.AddHttpContextAccessor();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));

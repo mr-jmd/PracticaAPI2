@@ -22,6 +22,9 @@ namespace Vehicles.Entities
         [JsonIgnore]
         public ICollection<History> Histories { get; set; }
 
+        [JsonIgnore]
+        public ICollection<VehiclePhoto> VehiclePhotos { get; set; }
+
         [Display(Name = "Modelo")]
         [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         [Range(1900, 3000, ErrorMessage = "Valor de módelo no válido.")]

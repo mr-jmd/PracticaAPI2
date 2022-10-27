@@ -28,6 +28,9 @@ namespace Vehicles.Helpers
 
             CreateMap<Detail, DetailDTO>().ReverseMap();
             CreateMap<DetailCreationDTO, Detail>();
+
+            CreateMap<VehiclePhoto, VehiclePhotoDTO>().ReverseMap();
+            CreateMap<VehiclePhotoCreationDTO, VehiclePhoto>();
         }
     }
 }
