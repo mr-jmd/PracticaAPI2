@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Vehicles.Data;
@@ -10,6 +12,7 @@ namespace Vehicles.Controllers
 {
     [ApiController]
     [Route("api/vehiclephotos")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Admin")]
     public class VehiclePhotosController: ControllerBase
     {
         private readonly ILogger<VehiclePhotosController> logger;

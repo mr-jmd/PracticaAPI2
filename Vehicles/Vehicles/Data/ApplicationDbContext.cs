@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Vehicles.Entities;
+using Vehicles.Models;
 
 namespace Vehicles.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
@@ -18,10 +19,11 @@ namespace Vehicles.Data
         public DbSet<VehicleType> VehicleTypes { get; set; }
         public DbSet<Detail> Details { get; set; }
         public DbSet<VehiclePhoto> VehiclePhotos { get; set; }
+        public DbSet<IdentityModel> Fields { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            //base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Vehicle>()
                 .HasOne(bc => bc.VehicleType)
@@ -50,6 +52,21 @@ namespace Vehicles.Data
                 .HasOne(bc => bc.Vehicle)
                 .WithMany(b => b.VehiclePhotos)
                 .HasForeignKey(bc => bc.VehicleId);
+
+            modelBuilder.Entity<Vehicle>()
+                .HasOne(bc => bc.IdentityModel)
+                .WithMany(b => b.Vehicles)
+                .HasForeignKey(bc => bc.UserId);
+
+            modelBuilder.Entity<History>()
+                .HasOne(bc => bc.IdentityModel)
+                .WithMany(b => b.Histories)
+                .HasForeignKey(bc => bc.UserId);
+
+            modelBuilder.Entity<IdentityModel>()
+                .HasOne(bc => bc.DocumentType)
+                .WithMany(b => b.IdentityModels)
+                .HasForeignKey(bc => bc.DocumentTypeId);
 
             base.OnModelCreating(modelBuilder);
         }

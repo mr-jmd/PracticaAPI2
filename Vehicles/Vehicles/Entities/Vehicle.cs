@@ -1,15 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Vehicles.Models;
 
 namespace Vehicles.Entities
 {
     public class Vehicle
     {
         public int Id { get; set; }
-
         public int VehicleTypeId { get; set; }
-
         public int BrandId { get; set; }
+        public string UserId { get; set; }
 
         [JsonIgnore]
         [Display(Name = "Tipo de vehículo")]
@@ -18,6 +18,10 @@ namespace Vehicles.Entities
         [JsonIgnore]
         [Display(Name = "Marca")]
         public Brand Brand { get; set; }
+
+        [JsonIgnore]
+        [Display(Name = "Usuario")]
+        public IdentityModel IdentityModel { get; set; }
 
         [JsonIgnore]
         public ICollection<History> Histories { get; set; }
